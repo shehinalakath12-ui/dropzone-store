@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>DropZone - Online Store</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f5f5f5;
+    color: #222;
+}
+
+/* HEADER */
+header {
+    background: #111;
+    color: white;
+    padding: 20px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+    color: #00e5ff;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+}
+
+.cart-button {
+    background: #00e5ff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* HERO */
+.hero {
+    padding: 80px 20px;
+    text-align: center;
+    color: white;
+    background: linear-gradient(135deg, #111, #333);
+}
+
+.hero h1 {
+    font-size: 55px;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-size: 19px;
+    margin-bottom: 25px;
+}
+
+.hero button {
+    padding: 14px 25px;
+    background: #00e5ff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* PRODUCTS */
+.products {
+    padding: 60px 8%;
+}
+
+.products h2 {
+    text-align: center;
+    font-size: 35px;
+    margin-bottom: 35px;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+}
+
+.product {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 15px #0002;
+}
+
+.product img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.product h3 {
+    margin: 15px 0 8px;
+}
+
+.price {
+    font-size: 21px;
+    font-weight: bold;
+    margin: 12px;
+}
+
+.product button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background: #111;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.product button:hover {
+    background: #00a9bd;
+}
+
+/* CART */
+.cart {
+    position: fixed;
+    right: -400px;
+    top: 0;
+    width: 380px;
+    max-width: 100%;
+    height: 100%;
+    background: white;
+    z-index: 20;
+    padding: 25px;
+    box-shadow: -5px 0 20px #0003;
+    transition: 0.3s;
+}
+
+.cart.open {
+    right: 0;
+}
+
+.cart h2 {
+    margin-bottom: 20px;
+}
+
+.close {
+    float: right;
+    font-size: 25px;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.cart-item {
+    padding: 15px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.cart-total {
+    margin-top: 25px;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.checkout {
+    width: 100%;
+    padding: 14px;
+    margin-top: 20px;
+    border: none;
+    background: #00b894;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* FOOTER */
+footer {
+    background: #111;
+    color: white;
+    text-align: center;
+    padding: 30px;
+}
+
+/* MOBILE */
+@media(max-width:600px) {
+
+    header {
+        padding: 15px;
+    }
+
+    nav a {
+        display: none;
+    }
+
+    .hero h1 {
+        font-size: 40px;
+    }
+
+    .cart {
+        width: 100%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+
+    <div class="logo">
+        DROPZONE
+    </div>
+
+    <nav>
+        <a href="#">Home</a>
+        <a href="#products">Products</a>
+
+        <button class="cart-button" onclick="openCart()">
+            🛒 Cart (<span id="cartCount">0</span>)
+        </button>
+    </nav>
+
+</header>
+
+
+<!-- HERO -->
+<section class="hero">
+
+    <h1>Find Cool Stuff 🔥</h1>
+
+    <p>
+        Trending products at amazing prices.
+    </p>
+
+    <button onclick="document.getElementById('products').scrollIntoView()">
+        Shop Now
+    </button>
+
+</section>
+
+
+<!-- PRODUCTS -->
+<section class="products" id="products">
+
+    <h2>🔥 Trending Products</h2>
+
+    <div class="product-grid">
+
+
+        <!-- PRODUCT 1 -->
+        <div class="product">
+
+            <img
+                src="https://via.placeholder.com/400x300"
+                alt="Wireless Earbuds"
+            >
+
+            <h3>Wireless Earbuds</h3>
+
+            <p>
+                High-quality wireless earbuds.
+            </p>
+
+            <div class="price">
+                ₹799
+            </div>
+
+            <button onclick="addToCart('Wireless Earbuds',799)">
+                Add to Cart
+            </button>
+
+        </div>
+
+
+        <!-- PRODUCT 2 -->
+        <div class="product">
+
+            <img
+                src="https://via.placeholder.com/400x300"
+                alt="Smart Watch"
+            >
+
+            <h3>Smart Watch</h3>
+
+            <p>
+                Stylish smartwatch for everyday use.
+            </p>
+
+            <div class="price">
+                ₹1,299
+            </div>
+
+            <button onclick="addToCart('Smart Watch',1299)">
+                Add to Cart
+            </button>
+
+        </div>
+
+
+        <!-- PRODUCT 3 -->
+        <div class="product">
+
+            <img
+                src="https://via.placeholder.com/400x300"
+                alt="LED Lamp"
+            >
+
+            <h3>LED Desk Lamp</h3>
+
+            <p>
+                Modern lamp for your desk.
+            </p>
+
+            <div class="price">
+                ₹599
+            </div>
+
+            <button onclick="addToCart('LED Desk Lamp',599)">
+                Add to Cart
+            </button>
+
+        </div>
+
+
+        <!-- PRODUCT 4 -->
+        <div class="product">
+
+            <img
+                src="https://via.placeholder.com/400x300"
+                alt="Phone Stand"
+            >
+
+            <h3>Phone Stand</h3>
+
+            <p>
+                Adjustable stand for your phone.
+            </p>
+
+            <div class="price">
+                ₹299
+            </div>
+
+            <button onclick="addToCart('Phone Stand',299)">
+                Add to Cart
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CART -->
+<div class="cart" id="cart">
+
+    <button class="close" onclick="closeCart()">
+        ✕
+    </button>
+
+    <h2>🛒 Your Cart</h2>
+
+    <div id="cartItems">
+        Your cart is empty.
+    </div>
+
+    <div class="cart-total">
+        Total: ₹<span id="total">0</span>
+    </div>
+
+    <button class="checkout" onclick="checkout()">
+        Checkout
+    </button>
+
+</div>
+
+
+<!-- FOOTER -->
+<footer>
+
+    <p>
+        © 2026 DropZone. All Rights Reserved.
+    </p>
+
+</footer>
+
+
+<script>
+
+let cart = [];
+
+let total = 0;
+
+
+/* ADD PRODUCT */
+
+function addToCart(name, price) {
+
+    cart.push({
+        name: name,
+        price: price
+    });
+
+    total += price;
+
+    updateCart();
+
+    alert(name + " added to cart! 🛒");
+}
+
+
+/* UPDATE CART */
+
+function updateCart() {
+
+    document.getElementById("cartCount").innerText =
+        cart.length;
+
+    document.getElementById("total").innerText =
+        total;
+
+    let items =
+        document.getElementById("cartItems");
+
+    if (cart.length === 0) {
+
+        items.innerHTML =
+            "Your cart is empty.";
+
+        return;
+    }
+
+    items.innerHTML = "";
+
+    cart.forEach(function(product, index) {
+
+        items.innerHTML += `
+
+            <div class="cart-item">
+
+                <strong>
+                    ${product.name}
+                </strong>
+
+                <br>
+
+                ₹${product.price}
+
+                <br><br>
+
+                <button
+                    onclick="removeItem(${index})">
+                    Remove
+                </button>
+
+            </div>
+
+        `;
+
+    });
+
+}
+
+
+/* REMOVE PRODUCT */
+
+function removeItem(index) {
+
+    total -= cart[index].price;
+
+    cart.splice(index, 1);
+
+    updateCart();
+
+}
+
+
+/* OPEN CART */
+
+function openCart() {
+
+    document
+        .getElementById("cart")
+        .classList
+        .add("open");
+
+}
+
+
+/* CLOSE CART */
+
+function closeCart() {
+
+    document
+        .getElementById("cart")
+        .classList
+        .remove("open");
+
+}
+
+
+/* CHECKOUT */
+
+function checkout() {
+
+    if (cart.length === 0) {
+
+        alert("Your cart is empty!");
+
+        return;
+    }
+
+    alert(
+        "Order placed successfully! 🎉\n\n" +
+        "Total: ₹" + total
+    );
+
+    cart = [];
+
+    total = 0;
+
+    updateCart();
+
+    closeCart();
+
+}
+
+</script>
+
+</body>
+</html>
