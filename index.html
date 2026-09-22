@@ -242,7 +242,7 @@ footer {
 <!-- HERO -->
 <section class="hero">
 
-    <h1>Find Cool Stuff 🔥</h1>
+    <h1>Find Cool Stuff </h1>
 
     <p>
         Trending products at amazing prices.
@@ -258,7 +258,7 @@ footer {
 <!-- PRODUCTS -->
 <section class="products" id="products">
 
-    <h2>🔥 Trending Products</h2>
+    <h2> Trending Products</h2>
 
     <div class="product-grid">
 
@@ -278,7 +278,7 @@ footer {
             </p>
 
             <div class="price">
-                ₹799
+                $799
             </div>
 
             <button onclick="addToCart('Wireless Earbuds',799)">
@@ -303,7 +303,7 @@ footer {
             </p>
 
             <div class="price">
-                ₹1,299
+                $1,299
             </div>
 
             <button onclick="addToCart('Smart Watch',1299)">
@@ -328,7 +328,7 @@ footer {
             </p>
 
             <div class="price">
-                ₹599
+                $599
             </div>
 
             <button onclick="addToCart('LED Desk Lamp',599)">
@@ -353,7 +353,7 @@ footer {
             </p>
 
             <div class="price">
-                ₹299
+                $299
             </div>
 
             <button onclick="addToCart('Phone Stand',299)">
@@ -381,7 +381,7 @@ footer {
     </div>
 
     <div class="cart-total">
-        Total: ₹<span id="total">0</span>
+        Total: $<span id="total">0</span>
     </div>
 
     <button class="checkout" onclick="checkout()">
@@ -460,7 +460,7 @@ function updateCart() {
 
                 <br>
 
-                ₹${product.price}
+                $${product.price}
 
                 <br><br>
 
@@ -528,7 +528,7 @@ function checkout() {
 
     alert(
         "Order placed successfully! 🎉\n\n" +
-        "Total: ₹" + total
+        "Total: " + total
     );
 
     cart = [];
